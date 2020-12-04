@@ -24,8 +24,6 @@ def get_test_case(file_name):
                 continue
             if not section:
                 raise Exception('Wrongly configured test case')
-            if not line:
-                continue
             test_case[section].append(line)
     return test_case
 
