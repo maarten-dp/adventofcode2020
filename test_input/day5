@@ -1,0 +1,8 @@
+[input]
+BFFFBBFRRR
+FFFBBBFRRR
+BBFFBBFRLL
+[expected1]
+820
+[expected2]
+None
