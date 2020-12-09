@@ -2,6 +2,7 @@ import pkgutil
 import os.path as osp
 from collections import defaultdict
 import copy
+import time
 
 SOLVER_PKG = 'solvers'
 TEST_LOCATION = 'test_input'
@@ -37,6 +38,12 @@ def run_test(puzzle_input, solve, expected):
         print('TEST {} OK'.format(solver_name))
 
 
+def run(puzzle_input, solve):
+    t1 = time.time()
+    result = solve(copy.deepcopy(puzzle_input))
+    print("RESULT:", result, "({:.5f}s)".format(time.time() - t1))
+
+
 for modelinfo in pkgutil.iter_modules([SOLVER_PKG]):
     day_module = modelinfo.name
     importer = modelinfo.module_finder
@@ -49,9 +56,9 @@ for modelinfo in pkgutil.iter_modules([SOLVER_PKG]):
     test_case = get_test_case(modelinfo.name)
 
     run_test(test_case['input'], solver.solve1, test_case['expected1'][0])
-    print("RESULT 1:", solver.solve1(copy.deepcopy(puzzle_input)))
+    run(puzzle_input, solver.solve1)
 
     if hasattr(solver, 'solve2'):
         run_test(test_case['input'], solver.solve2, test_case['expected2'][0])
-        print("RESULT 2:", solver.solve2(copy.deepcopy(puzzle_input)))
+        run(puzzle_input, solver.solve2)
 
