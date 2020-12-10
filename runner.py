@@ -30,7 +30,7 @@ def get_test_case(file_name):
 
 
 def run_test(puzzle_input, solve, expected):
-    result = str(copy.deepcopy(solve(puzzle_input)))
+    result = str(solve(copy.deepcopy(puzzle_input)))
     solver_name = solve.__name__
     if result != expected:
         print('TEST {} FAILED: {} != {}'.format(solver_name, result, expected))
