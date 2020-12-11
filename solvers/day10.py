@@ -17,7 +17,7 @@ def solve2(puzzle_input):
     sorted_adapters = clean(puzzle_input)
 
     # splitting up into sections is not needed but brings down 
-    # execution time from 3h+ to 0.00024s
+    # execution time from 7h+ to 0.00024s
     section = []
     sections = [section]
     for a, b in zip(sorted_adapters, sorted_adapters[1:]):

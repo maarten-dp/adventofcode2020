@@ -3,6 +3,7 @@ import os.path as osp
 from collections import defaultdict
 import copy
 import time
+import sys
 
 SOLVER_PKG = 'solvers'
 TEST_LOCATION = 'test_input'
@@ -44,16 +45,14 @@ def run(puzzle_input, solve):
     print("RESULT:", result, "({:.5f}s)".format(time.time() - t1))
 
 
-for modelinfo in pkgutil.iter_modules([SOLVER_PKG]):
-    day_module = modelinfo.name
-    importer = modelinfo.module_finder
+def run_for_day(importer, day_module, moduleinfo):
     solver = importer.find_module(day_module).load_module(day_module)
 
-    puzzle_input = open(osp.join('input', modelinfo.name)).readlines()
+    puzzle_input = open(osp.join('input', moduleinfo.name)).readlines()
     puzzle_input = [line.strip('\n') for line in puzzle_input]
 
     print_title(day_module)
-    test_case = get_test_case(modelinfo.name)
+    test_case = get_test_case(moduleinfo.name)
 
     run_test(test_case['input'], solver.solve1, test_case['expected1'][0])
     run(puzzle_input, solver.solve1)
@@ -62,3 +61,14 @@ for modelinfo in pkgutil.iter_modules([SOLVER_PKG]):
         run_test(test_case['input'], solver.solve2, test_case['expected2'][0])
         run(puzzle_input, solver.solve2)
 
+
+modules = {}
+for moduleinfo in pkgutil.iter_modules([SOLVER_PKG]):
+    day_module = moduleinfo.name
+    importer = moduleinfo.module_finder
+    modules[day_module.replace('day', '')] = (importer, day_module, moduleinfo)
+
+if len(sys.argv) == 2:
+    run_for_day(*modules[sys.argv[1]])
+else:
+    run_for_day(*modules[str(len(modules))])
