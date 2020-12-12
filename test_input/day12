@@ -1,0 +1,10 @@
+[input]
+F10
+N3
+F7
+R90
+F11
+[expected1]
+25
+[expected2]
+286
