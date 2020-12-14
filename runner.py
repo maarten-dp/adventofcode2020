@@ -27,6 +27,8 @@ def get_test_case(file_name):
             if not section:
                 raise Exception('Wrongly configured test case')
             test_case[section].append(line)
+    if 'input2' not in test_case:
+        test_case['input2'] = test_case['input']
     return test_case
 
 
@@ -58,7 +60,7 @@ def run_for_day(importer, day_module, moduleinfo):
     run(puzzle_input, solver.solve1)
 
     if hasattr(solver, 'solve2'):
-        run_test(test_case['input'], solver.solve2, test_case['expected2'][0])
+        run_test(test_case['input2'], solver.solve2, test_case['expected2'][0])
         run(puzzle_input, solver.solve2)
 
 
