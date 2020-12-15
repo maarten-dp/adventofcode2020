@@ -1,0 +1,6 @@
+[input]
+0,3,6
+[expected1]
+436
+[expected2]
+175594
