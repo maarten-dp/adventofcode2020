@@ -1,0 +1,8 @@
+[input]
+.#.
+..#
+###
+[expected1]
+112
+[expected2]
+848
