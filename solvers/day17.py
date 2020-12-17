@@ -58,8 +58,6 @@ class Vector:
         return inst
 
     def __init__(self, *args):
-        # for member, value in zip(self.members, args):
-        #     setattr(self, member, value)
         self._vector = tuple(args)
 
     @property
